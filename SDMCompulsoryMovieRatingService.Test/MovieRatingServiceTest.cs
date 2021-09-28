@@ -42,22 +42,62 @@ namespace SDMCompulsoryMovieRatingService.Test
             
         }
 
-        [Fact]
-        public void GetAverageRateFromReviewerTest()
+        [Theory]
+        [InlineData(3,0.0)]
+        [InlineData(2,4.0)]
+        [InlineData(1,3.5)]
+        public void GetAverageRateFromReviewerTest(int reviewer, double expected)
         {
+            var service = new MovieRatingService(repoMock.Object);
             
+            dataStore.Add(new MovieRating(2, 1, 4, DateTime.Now));
+            dataStore.Add(new MovieRating(1,1,3,DateTime.Now));
+            dataStore.Add(new MovieRating(1,2,5,DateTime.Now));
+            dataStore.Add(new MovieRating(1,3,4,DateTime.Now));
+            dataStore.Add(new MovieRating(1,4,2,DateTime.Now));
+
+            double result = service.GetAverageRateFromReviewer(reviewer);
+            Assert.Equal(expected, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
         
-        [Fact]
-        public void GetNumberOfRatesByReviewerTest()
+        [Theory]
+        [InlineData(3,1,0)]
+        [InlineData(2,4,1)]
+        [InlineData(1,4,2)]
+        public void GetNumberOfRatesByReviewerTest(int reviewer, int rate, int expected)
         {
+            var service = new MovieRatingService(repoMock.Object);
             
+            dataStore.Add(new MovieRating(2, 1, 4, DateTime.Now));
+            dataStore.Add(new MovieRating(1,1,3,DateTime.Now));
+            dataStore.Add(new MovieRating(1,2,4,DateTime.Now));
+            dataStore.Add(new MovieRating(1,3,4,DateTime.Now));
+            dataStore.Add(new MovieRating(1,4,2,DateTime.Now));
+
+            int result = service.GetNumberOfRatesByReviewer(reviewer, rate);
+            Assert.Equal(expected, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
             
-        [Fact]
-        public void GetNumberOfReviewsTest()
+        [Theory]
+        [InlineData(3,1)]
+        [InlineData(2,1)]
+        [InlineData(1,2)]
+        [InlineData(4,1)]
+        public void GetNumberOfReviewsTest(int movie, int expected)
         {
+            var service = new MovieRatingService(repoMock.Object);
             
+            dataStore.Add(new MovieRating(2, 1, 4, DateTime.Now));
+            dataStore.Add(new MovieRating(1,1,3,DateTime.Now));
+            dataStore.Add(new MovieRating(1,2,5,DateTime.Now));
+            dataStore.Add(new MovieRating(1,3,4,DateTime.Now));
+            dataStore.Add(new MovieRating(1,4,2,DateTime.Now));
+
+            int result = service.GetNumberOfReviews(movie);
+            Assert.Equal(expected, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
             
         [Fact]
