@@ -103,43 +103,42 @@ namespace SDMCompulsoryMovieRatingService.Test
         [Fact]
         public void GetAverageRateOfMovieTest()
         {
-            
-        }
+            throw new System.NotImplementedException();        }
             
         [Fact]
         public void  GetNumberOfRatesTest()
         {
-            
+            throw new System.NotImplementedException();
         }
             
         [Fact]
         public void GetMoviesWithHighestNumberOfTopRatesTest()
         {
-            
+            throw new System.NotImplementedException();
         }
             
         [Fact]
         public void  GetMostProductiveReviewersTest()
         {
-            
+            throw new System.NotImplementedException();
         }
             
         [Fact]
         public void GetTopRatedMoviesTest()
         {
-            
+            throw new System.NotImplementedException();
         }
             
         [Fact]
         public void GetTopMoviesByReviewerTest()
         {
-            
+            throw new System.NotImplementedException();
         }
             
         [Fact]
         public void GetReviewersByMovieTest()
         {
-            
+            throw new System.NotImplementedException();
         }
     }
 }
