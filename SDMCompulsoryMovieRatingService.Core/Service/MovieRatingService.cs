@@ -42,7 +42,15 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         //todo method 3
         public int GetNumberOfRatesByReviewer(int reviewer, int rate)
         {
-            throw new System.NotImplementedException();
+            int ratesByReviewer = 0;
+            foreach (MovieRating r in _movieRatingRepo.GetAll())
+            {
+                if (r.Reviewer == reviewer && r.Grade == rate)
+                {
+                    ratesByReviewer++;
+                }
+            }
+            return ratesByReviewer;
         }
 
         //todo method 4

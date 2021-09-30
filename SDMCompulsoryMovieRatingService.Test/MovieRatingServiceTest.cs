@@ -67,18 +67,18 @@ namespace SDMCompulsoryMovieRatingService.Test
         
         //todo test 3
         [Theory]
-        [InlineData(3,1,1)]
-        [InlineData(2,4,4)]
-        [InlineData(1,2,2)]
+        [InlineData(1,2,3)]
+        [InlineData(2,4,1)]
+        [InlineData(3,1,0)]
         public void GetNumberOfRatesByReviewerTest(int reviewer, int rate, int expected)
         {
             var service = new MovieRatingService(repoMock.Object);
             
-            dataStore.Add(new MovieRating(2, 1, 4, DateTime.Now));
-            dataStore.Add(new MovieRating(1,1,3,DateTime.Now));
-            dataStore.Add(new MovieRating(1,2,4,DateTime.Now));
-            dataStore.Add(new MovieRating(1,3,4,DateTime.Now));
-            dataStore.Add(new MovieRating(1,4,2,DateTime.Now));
+            dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(1,2,2,DateTime.Now));
+            dataStore.Add(new MovieRating(1,3,2,DateTime.Now));
+            dataStore.Add(new MovieRating(2,1,4,DateTime.Now));
+            dataStore.Add(new MovieRating(2,2,3,DateTime.Now));
 
             var result = service.GetNumberOfRatesByReviewer(reviewer, rate);
             Assert.Equal(expected, result);
