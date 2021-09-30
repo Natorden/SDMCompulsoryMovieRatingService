@@ -36,7 +36,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             dataStore.Add(new MovieRating(1,1,3,DateTime.Now));
             dataStore.Add(new MovieRating(1,4,3,DateTime.Now));
 
-            int result = service.GetNumberOfReviewsFromReviewer(reviewer);
+            var result = service.GetNumberOfReviewsFromReviewer(reviewer);
             Assert.Equal(expected, result);
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
             
@@ -56,7 +56,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             dataStore.Add(new MovieRating(1,3,4,DateTime.Now));
             dataStore.Add(new MovieRating(1,4,2,DateTime.Now));
 
-            double result = service.GetAverageRateFromReviewer(reviewer);
+            var result = service.GetAverageRateFromReviewer(reviewer);
             Assert.Equal(expected, result);
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
@@ -75,7 +75,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             dataStore.Add(new MovieRating(1,3,4,DateTime.Now));
             dataStore.Add(new MovieRating(1,4,2,DateTime.Now));
 
-            int result = service.GetNumberOfRatesByReviewer(reviewer, rate);
+            var result = service.GetNumberOfRatesByReviewer(reviewer, rate);
             Assert.Equal(expected, result);
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
@@ -95,7 +95,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             dataStore.Add(new MovieRating(1,3,4,DateTime.Now));
             dataStore.Add(new MovieRating(1,4,2,DateTime.Now));
 
-            int result = service.GetNumberOfReviews(movie);
+            var result = service.GetNumberOfReviews(movie);
             Assert.Equal(expected, result);
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }

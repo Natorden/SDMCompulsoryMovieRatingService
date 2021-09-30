@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using SDMCompulsoryMovieRatingService.Core.IService;
 using SDMCompulsoryMovieRatingService.Core.Model;
 
@@ -15,15 +16,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
-            int count = 0;
-            foreach (MovieRating r in _movieRatingRepo.GetAll())
-            {
-                if (r.Reviewer == reviewer)
-                {
-                    count++;
-                }
-            }
-            return count;
+            return _movieRatingRepo.GetAll().Cast<MovieRating>().Count(r => r.Reviewer == reviewer);
         }
 
         public double GetAverageRateFromReviewer(int reviewer)
