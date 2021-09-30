@@ -21,7 +21,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
 
         public double GetAverageRateFromReviewer(int reviewer)
         {
-            throw new System.NotImplementedException();
+            return _movieRatingRepo.GetAll().Select(rating => rating.Reviewer).Average();
         }
 
         public int GetNumberOfRatesByReviewer(int reviewer, int rate)
