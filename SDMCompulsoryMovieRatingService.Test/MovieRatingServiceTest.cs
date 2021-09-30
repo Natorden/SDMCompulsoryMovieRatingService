@@ -44,27 +44,29 @@ namespace SDMCompulsoryMovieRatingService.Test
 
         [Theory]
         [InlineData(3,0.0)]
-        [InlineData(2,4.0)]
-        [InlineData(1,3.5)]
+        [InlineData(2,3.0)]
+        [InlineData(1,2.0)]
         public void GetAverageRateFromReviewerTest(int reviewer, double expected)
         {
             var service = new MovieRatingService(repoMock.Object);
             
             dataStore.Add(new MovieRating(2, 1, 4, DateTime.Now));
-            dataStore.Add(new MovieRating(1,1,3,DateTime.Now));
-            dataStore.Add(new MovieRating(1,2,5,DateTime.Now));
-            dataStore.Add(new MovieRating(1,3,4,DateTime.Now));
-            dataStore.Add(new MovieRating(1,4,2,DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(1,1,4,DateTime.Now));
+            dataStore.Add(new MovieRating(1,2,2,DateTime.Now));
+            dataStore.Add(new MovieRating(1,3,0,DateTime.Now));
+            dataStore.Add(new MovieRating(3,3,0,DateTime.Now));
 
+            
             var result = service.GetAverageRateFromReviewer(reviewer);
             Assert.Equal(expected, result);
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
         
         [Theory]
-        [InlineData(3,1,0)]
-        [InlineData(2,4,1)]
-        [InlineData(1,4,2)]
+        [InlineData(3,1,1)]
+        [InlineData(2,4,4)]
+        [InlineData(1,2,2)]
         public void GetNumberOfRatesByReviewerTest(int reviewer, int rate, int expected)
         {
             var service = new MovieRatingService(repoMock.Object);
