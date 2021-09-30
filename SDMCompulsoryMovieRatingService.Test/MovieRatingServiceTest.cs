@@ -24,6 +24,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             repoMock.Setup(x => x.GetAll()).Returns(() => dataStore);
         }
         
+        //todo test 1
         [Theory]
         [InlineData(3,0)]
         [InlineData(2,1)]
@@ -42,6 +43,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             
         }
 
+        //todo test 2
         [Theory]
         [InlineData(3,0.0)]
         [InlineData(2,3.0)]
@@ -63,6 +65,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
         
+        //todo test 3
         [Theory]
         [InlineData(3,1,1)]
         [InlineData(2,4,4)]
@@ -81,7 +84,8 @@ namespace SDMCompulsoryMovieRatingService.Test
             Assert.Equal(expected, result);
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
-            
+        
+        //todo test 4
         [Theory]
         [InlineData(3,1)]
         [InlineData(2,1)]
@@ -101,42 +105,67 @@ namespace SDMCompulsoryMovieRatingService.Test
             Assert.Equal(expected, result);
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
-            
+        
+        //todo test 5
         [Fact]
         public void GetAverageRateOfMovieTest()
         {
-            throw new System.NotImplementedException();        }
-            
-        [Fact]
-        public void  GetNumberOfRatesTest()
-        {
             throw new System.NotImplementedException();
         }
+
+        //todo test 6
+        [Theory]
+        [InlineData(1,2,3)]
+        [InlineData(2,5,2)]
+        [InlineData(3,1,2)]
+        public void  GetNumberOfRatesTest(int movie, int rate ,int expected)
+        {
+            var service = new MovieRatingService(repoMock.Object);
             
+            dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 3, 1, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 3, 1, DateTime.Now));
+
+
+
+            var result = service.GetNumberOfRates(movie,rate);
+            Assert.Equal(expected, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
+        }
+            
+        //todo test 7
         [Fact]
         public void GetMoviesWithHighestNumberOfTopRatesTest()
         {
             throw new System.NotImplementedException();
         }
             
+        //todo test 8
         [Fact]
         public void  GetMostProductiveReviewersTest()
         {
             throw new System.NotImplementedException();
         }
             
+        //todo test 9
         [Fact]
         public void GetTopRatedMoviesTest()
         {
             throw new System.NotImplementedException();
         }
             
+        //todo test 10
         [Fact]
         public void GetTopMoviesByReviewerTest()
         {
             throw new System.NotImplementedException();
         }
             
+        //todo test 11
         [Fact]
         public void GetReviewersByMovieTest()
         {

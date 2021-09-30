@@ -9,7 +9,7 @@ namespace SDMCompulsoryMovieRatingService.Core.IService
         int GetNumberOfRatesByReviewer(int reviewer, int rate);
         int GetNumberOfReviews(int movie);
         // double GetAverageRateOfMovie(int movie);
-        // int GetNumberOfRates(int movie, int rate);
+        int GetNumberOfRates(int movie, int rate);
         // List<int> GetMoviesWithHighestNumberOfTopRates();
         // List<int> GetMostProductiveReviewers();
         // List<int> GetTopRatedMovies(int amount);
