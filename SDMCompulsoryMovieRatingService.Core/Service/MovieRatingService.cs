@@ -28,14 +28,18 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         {
             //_movieRatingRepo.GetAll().Select(r => (r.Grade)/(r.Reviewer)).Average();
             //todo make this code work, right now it takes grade sum from test and divides it by how many lines of code there is when you do the datastore.Add method, we need it to only divide by the reviewer that assigned the rating, not all of them
-            int average = 0;
+            int numOfRew = 0;
+            int rewSum = 0;
+            
             foreach (MovieRating r in _movieRatingRepo.GetAll())
             {
                 if (r.Reviewer == reviewer)
                 {
-                    average = r.Grade / r.Reviewer;
+                    rewSum += r.Grade;
+                    numOfRew++;
                 }
             }
+            double average = rewSum/numOfRew;
             return average;
         }
 
