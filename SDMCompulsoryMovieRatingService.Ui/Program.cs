@@ -2,15 +2,15 @@
 
 namespace SDMCompulsoryMovieRatingService.Ui
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            int num1 = 3;
-            int num2 = 4;
-            int sum = num1 + num2;
-            double divRes = (double)sum / 2;
+            var num1 = 3;
+            var num2 = 4;
+            var sum = num1 + num2;
+            var divRes = (double) sum / 2;
             Console.WriteLine(divRes);
         }
     }

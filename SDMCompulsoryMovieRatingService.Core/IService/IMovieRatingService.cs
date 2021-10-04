@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SDMCompulsoryMovieRatingService.Core.IService
+﻿namespace SDMCompulsoryMovieRatingService.Core.IService
 {
     public interface IMovieRatingService
     {
@@ -8,7 +6,8 @@ namespace SDMCompulsoryMovieRatingService.Core.IService
         double GetAverageRateFromReviewer(int reviewer);
         int GetNumberOfRatesByReviewer(int reviewer, int rate);
         int GetNumberOfReviews(int movie);
-         double GetAverageRateOfMovie(int movie);
+        double GetAverageRateOfMovie(int movie);
+
         int GetNumberOfRates(int movie, int rate);
         // List<int> GetMoviesWithHighestNumberOfTopRates();
         // List<int> GetMostProductiveReviewers();

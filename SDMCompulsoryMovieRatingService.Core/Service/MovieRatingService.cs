@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using SDMCompulsoryMovieRatingService.Core.IService;
 using SDMCompulsoryMovieRatingService.Core.Model;
 
@@ -13,9 +12,9 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         {
             _movieRatingRepo = movieRatingRepository;
         }
-        
+
         //todo im adding todos then a number to show which number test this is in correlation to assignment pdf for easier navigation
-        
+
         //todo method 1
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
@@ -32,7 +31,8 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
                 rewSum += r.Grade;
                 numOfRew++;
             }
-            double average = (double)rewSum/numOfRew;
+
+            var average = (double) rewSum / numOfRew;
             return average;
         }
 
@@ -52,18 +52,17 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         //todo => do not convert to linq, i want to keep it as a foreach loop as its easier for me to read and explain
         public double GetAverageRateOfMovie(int movie)
         {
-            int numOfRew = 0;
-            int rewSum = 0;
-            
+            var numOfRew = 0;
+            var rewSum = 0;
+
             foreach (MovieRating r in _movieRatingRepo.GetAll())
-            {
                 if (r.Movie == movie)
                 {
                     rewSum += r.Grade;
                     numOfRew++;
                 }
-            }
-            double average = (double)rewSum/numOfRew;
+
+            var average = (double) rewSum / numOfRew;
             return average;
         }
 
@@ -72,7 +71,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         {
             return _movieRatingRepo.GetAll().Cast<MovieRating>().Count(r => r.Movie == movie && r.Grade == rate);
         }
-        
+
         //todo method 7
         // public List<int> GetMoviesWithHighestNumberOfTopRates()
         // {
