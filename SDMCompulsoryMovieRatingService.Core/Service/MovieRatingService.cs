@@ -145,26 +145,26 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
          public List<int> GetReviewersByMovie(int movie)
          {
              List<int> result = new List<int>();
-
              var orderedReviewersForMovie =
                  from review in _movieRatingRepo.GetAll()
                  where review.Movie == movie
                  orderby review.Grade descending
                  select new {Reviewer = review.Reviewer};
-
              var listOrdered = orderedReviewersForMovie.Take(3);
-
              foreach (var reviewr in listOrdered)
              {
                  result.Add(reviewr.Reviewer);
              }
 
              return result;
+
+
+             // var topRates = _movieRatingRepo.GetAll()
+             //     .Where(y => y.Movie == movie)
+             //     .OrderByDescending(y => y.Grade)
+             //     .ThenByDescending(z => z.ReviewDate);
+             //      
+             // return topRates.Select(z => z.Reviewer).ToList();
          }
-         // public List<int> GetReviewersByMovie(int movie)
-         // {
-         //     var topRates = _movieRatingRepo.GetAll().Where(y => y.Movie == movie).OrderByDescending(y => y.Grade).ThenByDescending(z => z.ReviewDate);
-         //     return topRates.Select(z => z.Reviewer).ToList();
-         // }
     }
 }
