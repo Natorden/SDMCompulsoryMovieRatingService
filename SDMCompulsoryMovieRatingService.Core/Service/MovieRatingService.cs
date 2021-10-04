@@ -49,6 +49,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         }
 
         //todo method 5
+        //todo => do not convert to linq, i want to keep it as a foreach loop as its easier for me to read and explain
         public double GetAverageRateOfMovie(int movie)
         {
             int numOfRew = 0;
