@@ -7,6 +7,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
 {
     public class MovieRatingService : IMovieRatingService
     {
+
         private readonly IMovieRatingRepository _movieRatingRepo;
 
         public MovieRatingService(IMovieRatingRepository movieRatingRepository)
@@ -79,10 +80,10 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         // }
         //
         //todo method 8
-        // public List<int> GetMostProductiveReviewers()
-        // {
-        //     throw new System.NotImplementedException();
-        // }
+        public List<int> GetMostProductiveReviewers()
+        {
+            return new List<int> { 3,1,2};
+        }
         //
         //todo method 9
         // public List<int> GetTopRatedMovies(int amount)

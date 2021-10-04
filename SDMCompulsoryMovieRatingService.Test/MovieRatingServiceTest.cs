@@ -162,10 +162,7 @@ namespace SDMCompulsoryMovieRatingService.Test
         }
             
         //todo test 7
-        // [Theory]
-        // [InlineData(1,2,3)]
-        // [InlineData(2,5,2)]
-        // [InlineData(3,1,2)]
+        [Fact]
         public void GetMoviesWithHighestNumberOfTopRatesTest()
         {
             throw new System.NotImplementedException();
@@ -175,7 +172,28 @@ namespace SDMCompulsoryMovieRatingService.Test
         [Fact]
         public void  GetMostProductiveReviewersTest()
         {
-            throw new System.NotImplementedException();
+            // we can just compare the ids of the users instead of comparing actual
+            // lists, since there would be a problem with instances, so we would not
+            // be able to compare them directly.
+            
+            var service = new MovieRatingService(repoMock.Object);
+            
+            dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 3, 1, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 2, 5, DateTime.Now));
+
+            dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 5, DateTime.Now));
+            
+            dataStore.Add(new MovieRating(3, 1, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 2, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 3, 3, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 4, 2, DateTime.Now));
+
+            List<int> expRes = new List<int>() {3, 1, 2};
+             var result = service.GetMostProductiveReviewers();
+            Assert.Equal(expRes, result);
+            //repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
             
         //todo test 9
