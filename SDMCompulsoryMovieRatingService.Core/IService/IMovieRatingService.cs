@@ -15,6 +15,6 @@ namespace SDMCompulsoryMovieRatingService.Core.IService
         List<int> GetMostProductiveReviewers();
         List<int> GetTopRatedMovies(int amount);
         // List<int> GetTopMoviesByReviewer(int reviewer);
-        // List<int> GetReviewersByMovie(int movie);
+        List<int> GetReviewersByMovie(int movie);
     }
 }

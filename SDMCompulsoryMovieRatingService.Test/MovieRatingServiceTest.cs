@@ -304,10 +304,24 @@ namespace SDMCompulsoryMovieRatingService.Test
         }
 
         //todo test 11
-        [Fact]
-        public void GetReviewersByMovieTest()
+        [Theory]
+        [InlineData(3)]
+        public void GetReviewersByMovieTest(int movie)
         {
-            throw new NotImplementedException();
+            var service = new MovieRatingService(repoMock.Object);
+            
+            dataStore.Add(new MovieRating(1, 3, 3, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 3, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 3, 1, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 2, 5, DateTime.Now));
+
+            var result = service.GetReviewersByMovie(movie);
+            var actualResult = new List<int> {2, 1, 3};
+            
+            Assert.Equal(actualResult, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
     }
 }

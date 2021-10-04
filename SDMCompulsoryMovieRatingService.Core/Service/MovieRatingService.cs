@@ -115,7 +115,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
              return topRatedMovies;
          }
          
-         public double AverageRateOfMovie(List<IMovieRating> list, int movie)
+         private double AverageRateOfMovie(List<IMovieRating> list, int movie)
          {
              var numOfRew = 0;
              var rewSum = 0;
@@ -141,9 +141,25 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
          }
         
         //todo method 11
-        // public List<int> GetReviewersByMovie(int movie)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
+        //Will return top 3 reviewers, with grades in descending order.
+         public List<int> GetReviewersByMovie(int movie)
+         {
+             List<int> result = new List<int>();
+
+             var orderedReviewersForMovie =
+                 from review in _movieRatingRepo.GetAll()
+                 where review.Movie == movie
+                 orderby review.Grade descending
+                 select new {Reviewer = review.Reviewer};
+
+             var listOrdered = orderedReviewersForMovie.Take(3);
+
+             foreach (var reviewr in listOrdered)
+             {
+                 result.Add(reviewr.Reviewer);
+             }
+
+             return result;
+         }
     }
 }
