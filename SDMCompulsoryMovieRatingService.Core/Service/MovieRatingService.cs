@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SDMCompulsoryMovieRatingService.Core.IService;
 using SDMCompulsoryMovieRatingService.Core.Model;
 

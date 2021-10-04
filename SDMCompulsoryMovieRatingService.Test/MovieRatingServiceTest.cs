@@ -173,7 +173,28 @@ namespace SDMCompulsoryMovieRatingService.Test
         [Fact]
         public void GetMostProductiveReviewersTest()
         {
-            throw new NotImplementedException();
+            // we can just compare the ids of the users instead of comparing actual
+            // lists, since there would be a problem with instances, so we would not
+            // be able to compare them directly.
+            
+            var service = new MovieRatingService(repoMock.Object);
+            
+            dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 3, 1, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 2, 5, DateTime.Now));
+
+            dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 5, DateTime.Now));
+            
+            dataStore.Add(new MovieRating(3, 1, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 2, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 3, 3, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 4, 2, DateTime.Now));
+
+            List<int> expRes = new List<int>() {3, 1, 2};
+            var result = service.GetMostProductiveReviewers();
+            Assert.Equal(expRes, result);
+            //repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
 
         //todo test 9

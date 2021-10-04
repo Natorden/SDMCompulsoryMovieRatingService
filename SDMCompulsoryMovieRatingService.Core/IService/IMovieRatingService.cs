@@ -1,4 +1,6 @@
-﻿namespace SDMCompulsoryMovieRatingService.Core.IService
+﻿using System.Collections.Generic;
+
+namespace SDMCompulsoryMovieRatingService.Core.IService
 {
     public interface IMovieRatingService
     {
