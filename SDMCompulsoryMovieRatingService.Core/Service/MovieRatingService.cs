@@ -95,11 +95,48 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
             return (from reviewerCount in reviewerReviews where reviewerCount.Count == maxReviews select reviewerCount.Reviewer).ToList();
         }
         
+<<<<<<< Updated upstream
         //todo method 9
         // public List<int> GetTopRatedMovies(int amount)
         // {
         //     throw new System.NotImplementedException();
         // }
+=======
+        // todo method 9
+         public List<int> GetTopRatedMovies(int amount = 1)
+         {
+             List<int> topRatedMovies = new List<int>();
+             var list = _movieRatingRepo.GetAll();
+             var groupedOrderedMovies =
+                 from entry in list
+                 group entry by entry.Movie
+                 into movieGroup
+                 orderby AverageRateOfMovie(list, movieGroup.Key) descending
+                 select new {movieGroup.Key};
+             var rightAmountMovies = groupedOrderedMovies.Take(amount);
+             foreach (var movie in rightAmountMovies)
+             {
+                 topRatedMovies.Add(movie.Key);
+             }
+             return topRatedMovies;
+         }
+         
+         public double AverageRateOfMovie(List<IMovieRating> list, int movie)
+         {
+             var numOfRew = 0;
+             var rewSum = 0;
+
+             foreach (MovieRating r in list)
+                 if (r.Movie == movie)
+                 {
+                     rewSum += r.Grade;
+                     numOfRew++;
+                 }
+
+             var average = (double) rewSum / numOfRew;
+             return average;
+         }
+>>>>>>> Stashed changes
         //
         //todo method 10
          public List<int> GetTopMoviesByReviewer(int reviewer)

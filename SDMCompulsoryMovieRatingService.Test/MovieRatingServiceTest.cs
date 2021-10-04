@@ -232,11 +232,56 @@ namespace SDMCompulsoryMovieRatingService.Test
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
 
-        //todo test 9
+        //todo test 9.1
         [Fact]
-        public void GetTopRatedMoviesTest()
+        public void GetTopRatedMoviesTestSingle()
         {
-            throw new NotImplementedException();
+            var service = new MovieRatingService(repoMock.Object);
+            
+            dataStore.Add(new MovieRating(1, 1, 4, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 1, 3, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 1, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(4, 1, 3, DateTime.Now));
+            dataStore.Add(new MovieRating(7, 1, 1, DateTime.Now));
+            // movie 1 avg 3.2
+            
+            dataStore.Add(new MovieRating(3, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 4, DateTime.Now));
+            // movie 2 avg 4.5
+            
+            dataStore.Add(new MovieRating(3, 3, 1, DateTime.Now));
+            // movie 3 avg 1
+            var actualRes = new List<int>() {2};
+            var result = service.GetTopRatedMovies();
+            
+            Assert.Equal(actualRes, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
+            }
+        
+        //todo test 9.2
+        [Fact]
+        public void GetTopRatedMoviesTestMultiple()
+        {
+            var service = new MovieRatingService(repoMock.Object);
+            
+            dataStore.Add(new MovieRating(1, 1, 4, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 1, 3, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 1, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(4, 1, 3, DateTime.Now));
+            dataStore.Add(new MovieRating(7, 1, 1, DateTime.Now));
+            // movie 1 avg 3.2
+            
+            dataStore.Add(new MovieRating(3, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 4, DateTime.Now));
+            // movie 2 avg 4.5
+            
+            dataStore.Add(new MovieRating(3, 3, 1, DateTime.Now));
+            // movie 3 avg 1
+            var actualRes = new List<int>() {2,1};
+            var result = service.GetTopRatedMovies(2);
+            
+            Assert.Equal(actualRes, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
 
         //todo test 10
