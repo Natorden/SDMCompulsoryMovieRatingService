@@ -26,18 +26,13 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         //todo method 2
         public double GetAverageRateFromReviewer(int reviewer)
         {
-            //_movieRatingRepo.GetAll().Select(r => (r.Grade)/(r.Reviewer)).Average();
             //todo make this code work, right now it takes grade sum from test and divides it by how many lines of code there is when you do the datastore.Add method, we need it to only divide by the reviewer that assigned the rating, not all of them
-            int numOfRew = 0;
-            int rewSum = 0;
-            
-            foreach (MovieRating r in _movieRatingRepo.GetAll())
+            var numOfRew = 0;
+            var rewSum = 0;
+            foreach (var r in _movieRatingRepo.GetAll().Cast<MovieRating>().Where(r => r.Reviewer == reviewer))
             {
-                if (r.Reviewer == reviewer)
-                {
-                    rewSum += r.Grade;
-                    numOfRew++;
-                }
+                rewSum += r.Grade;
+                numOfRew++;
             }
             double average = (double)rewSum/numOfRew;
             return average;
@@ -46,22 +41,13 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         //todo method 3
         public int GetNumberOfRatesByReviewer(int reviewer, int rate)
         {
-            int ratesByReviewer = 0;
-            foreach (MovieRating r in _movieRatingRepo.GetAll())
-            {
-                if (r.Reviewer == reviewer && r.Grade == rate)
-                {
-                    ratesByReviewer++;
-                }
-            }
-            return ratesByReviewer;
+            return _movieRatingRepo.GetAll().Cast<MovieRating>().Count(r => r.Reviewer == reviewer && r.Grade == rate);
         }
 
         //todo method 4
         public int GetNumberOfReviews(int movie)
         {
             return _movieRatingRepo.GetAll().Cast<MovieRating>().Count(r => r.Movie == movie);
-            //todo this works but idk if its correct kek
         }
 
         public double GetAverageRateOfMovie(int movie)
@@ -90,15 +76,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         //todo method 6
         public int GetNumberOfRates(int movie, int rate)
         {
-            int totalRate = 0;
-            foreach (MovieRating r in _movieRatingRepo.GetAll())
-            {
-                if (r.Movie == movie && r.Grade == rate)
-                {
-                    totalRate++;
-                }
-            }
-            return totalRate;
+            return _movieRatingRepo.GetAll().Cast<MovieRating>().Count(r => r.Movie == movie && r.Grade == rate);
         }
         
         //todo method 7
