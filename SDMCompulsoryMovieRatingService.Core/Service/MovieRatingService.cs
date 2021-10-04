@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SDMCompulsoryMovieRatingService.Core.IService;
 using SDMCompulsoryMovieRatingService.Core.Model;
@@ -77,25 +78,8 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         //todo method 7
          public List<int> GetMoviesWithHighestNumberOfTopRates()
          {
-             var productiveRates = new List<int>();
-             
-             var topRates =
-                 from movieRating in _movieRatingRepo.GetAll()
-                 group movieRating.Grade by movieRating.Grade into g
-                 select new {Movie = g.Key, Grade = g.Count()};
-             topRates = topRates.OrderByDescending(arg => arg.Grade);
-
-             foreach (var rate in topRates)
-             {
-                 if (rate.Movie == 5)
-                 {
-                     productiveRates.Add(rate.Grade);
-                 }
-                 
-             }
-
-             return productiveRates;
-         
+             var topRates = (_movieRatingRepo.GetAll().GroupBy(movie => movie.Grade).OrderByDescending(x => x.Key).FirstOrDefault() ?? throw new InvalidOperationException()).ToList();
+             return topRates.Select(movie => movie.Movie).Distinct().ToList();
          }
         
         //todo method 8
@@ -118,11 +102,13 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         // }
         //
         //todo method 10
-        // public List<int> GetTopMoviesByReviewer(int reviewer)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
-        //
+         public List<int> GetTopMoviesByReviewer(int reviewer)
+         {
+             var reviewerMovies = _movieRatingRepo.GetAll().Where(x => x.Reviewer == reviewer)
+                 .OrderByDescending(y => y.Grade).ThenByDescending(z => z.ReviewDate);
+             return reviewerMovies.Select(movie => movie.Movie).Distinct().ToList();
+         }
+        
         //todo method 11
         // public List<int> GetReviewersByMovie(int movie)
         // {
