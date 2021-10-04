@@ -5,12 +5,6 @@ namespace SDMCompulsoryMovieRatingService.Core.Model
 {
     public class MovieRating : IMovieRating
     {
-        public int Reviewer { get; private set; }
-        public int Movie { get; private set; }
-        public int Grade { get; private set;}
-        public DateTime ReviewDate { get; private set; }
-
-
         public MovieRating(int reviewer, int movie, int grade, DateTime reviewDate)
         {
             Reviewer = reviewer;
@@ -18,5 +12,10 @@ namespace SDMCompulsoryMovieRatingService.Core.Model
             Grade = grade;
             ReviewDate = reviewDate;
         }
+
+        public int Reviewer { get; }
+        public int Movie { get; }
+        public int Grade { get; }
+        public DateTime ReviewDate { get; }
     }
 }
