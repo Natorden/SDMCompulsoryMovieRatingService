@@ -86,11 +86,24 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         // }
         //
         //todo method 8
-        // public List<int> GetMostProductiveReviewers()
-        // {
-        //     throw new System.NotImplementedException();
-        // }
-        //
+        public List<int> GetMostProductiveReviewers()
+        {
+            List<int> productiveReviewers = new List<int>();
+
+            var reviewerReviews =
+                from movieRating in _movieRatingRepo.GetAll()
+                group movieRating.Reviewer by movieRating.Reviewer into g
+                select new {Reviewer = g.Key, Count = g.Count()};
+            int maxReviews = reviewerReviews.First().Count;
+            
+            foreach (var reviewerCount in reviewerReviews)
+            {
+                if (reviewerCount.Count == maxReviews) productiveReviewers.Add(reviewerCount.Reviewer);
+            }
+
+            return productiveReviewers;
+        }
+        
         //todo method 9
         // public List<int> GetTopRatedMovies(int amount)
         // {

@@ -171,11 +171,33 @@ namespace SDMCompulsoryMovieRatingService.Test
             throw new System.NotImplementedException();
         }
             
-        //todo test 8
         [Fact]
         public void  GetMostProductiveReviewersTest()
         {
-            throw new System.NotImplementedException();
+            var service = new MovieRatingService(repoMock.Object);
+
+            // TODO empty check is kinda sussy, the rest works
+            //var result = service.GetMostProductiveReviewers();
+            //Assert.Empty(service.GetMostProductiveReviewers());
+            
+            dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 3, 1, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 3, 1, DateTime.Now));
+            
+            var result = service.GetMostProductiveReviewers();
+            Assert.Equal(new List<int> {1,2}, result);
+            
+            dataStore.Add(new MovieRating(2, 4, 3, DateTime.Now));
+            
+            result = service.GetMostProductiveReviewers();
+            Assert.Single(result);
+            Assert.Equal(new List<int> {1},result);
+            
+            repoMock.Verify( repo => repo.GetAll(), Times.Exactly(2));
         }
             
         //todo test 9
