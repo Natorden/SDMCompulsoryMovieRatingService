@@ -115,7 +115,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
              return topRatedMovies;
          }
          
-         private double AverageRateOfMovie(List<IMovieRating> list, int movie)
+         public double AverageRateOfMovie(List<IMovieRating> list, int movie)
          {
              var numOfRew = 0;
              var rewSum = 0;
@@ -161,5 +161,10 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
 
              return result;
          }
+         // public List<int> GetReviewersByMovie(int movie)
+         // {
+         //     var topRates = _movieRatingRepo.GetAll().Where(y => y.Movie == movie).OrderByDescending(y => y.Grade).ThenByDescending(z => z.ReviewDate);
+         //     return topRates.Select(z => z.Reviewer).ToList();
+         // }
     }
 }
