@@ -39,7 +39,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
                     numOfRew++;
                 }
             }
-            double average = rewSum/numOfRew;
+            double average = (double)rewSum/numOfRew;
             return average;
         }
 
@@ -63,7 +63,24 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
             return _movieRatingRepo.GetAll().Cast<MovieRating>().Count(r => r.Movie == movie);
             //todo this works but idk if its correct kek
         }
-        
+
+        public double GetAverageRateOfMovie(int movie)
+        {
+            int numOfRew = 0;
+            int rewSum = 0;
+            
+            foreach (MovieRating r in _movieRatingRepo.GetAll())
+            {
+                if (r.Movie == movie)
+                {
+                    rewSum += r.Grade;
+                    numOfRew++;
+                }
+            }
+            double average = (double)rewSum/numOfRew;
+            return average;
+        }
+
         //todo method 5
         // public double GetAverageRateOfMovie(int movie)
         // {
