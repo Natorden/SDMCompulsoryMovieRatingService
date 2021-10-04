@@ -186,6 +186,23 @@ namespace SDMCompulsoryMovieRatingService.Test
             Assert.Equal(new List<int> {1,2}, result);
             repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
+        
+        [Fact]
+        public void GetMostProductiveReviewersTestSingle()
+        {
+            var service = new MovieRatingService(repoMock.Object);
+            
+            dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 3, 1, DateTime.Now));
+            
+            var result = service.GetMostProductiveReviewers();
+            Assert.Equal(new List<int> {3}, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
+        }
 
         //todo test 9
         [Fact]

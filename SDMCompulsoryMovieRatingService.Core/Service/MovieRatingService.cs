@@ -89,6 +89,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
                 from movieRating in _movieRatingRepo.GetAll()
                 group movieRating.Reviewer by movieRating.Reviewer into g
                 select new {Reviewer = g.Key, Count = g.Count()};
+            reviewerReviews = reviewerReviews.OrderByDescending(arg => arg.Count);
             int maxReviews = reviewerReviews.First().Count;
             
             foreach (var reviewerCount in reviewerReviews)
