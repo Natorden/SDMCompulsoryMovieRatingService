@@ -141,9 +141,10 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
          }
         
         //todo method 11
-        // public List<int> GetReviewersByMovie(int movie)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
+         public List<int> GetReviewersByMovie(int movie)
+         {
+             var topRates = _movieRatingRepo.GetAll().Where(y => y.Movie == movie).OrderByDescending(y => y.Grade).ThenByDescending(z => z.ReviewDate);
+             return topRates.Select(z => z.Reviewer).ToList();
+         }
     }
 }
