@@ -173,10 +173,6 @@ namespace SDMCompulsoryMovieRatingService.Test
         public void GetMostProductiveReviewersTest()
         {
             var service = new MovieRatingService(repoMock.Object);
-
-            // TODO empty check is kinda sussy, the rest works
-            //var result = service.GetMostProductiveReviewers();
-            //Assert.Empty(service.GetMostProductiveReviewers());
             
             dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
             dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
@@ -188,14 +184,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             
             var result = service.GetMostProductiveReviewers();
             Assert.Equal(new List<int> {1,2}, result);
-            
-            dataStore.Add(new MovieRating(2, 4, 3, DateTime.Now));
-            
-            result = service.GetMostProductiveReviewers();
-            Assert.Single(result);
-            Assert.Equal(new List<int> {1},result);
-            
-            repoMock.Verify( repo => repo.GetAll(), Times.Exactly(2));
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
         }
 
         //todo test 9
