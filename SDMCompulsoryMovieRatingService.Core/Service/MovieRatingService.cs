@@ -95,13 +95,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
             return (from reviewerCount in reviewerReviews where reviewerCount.Count == maxReviews select reviewerCount.Reviewer).ToList();
         }
         
-<<<<<<< Updated upstream
-        //todo method 9
-        // public List<int> GetTopRatedMovies(int amount)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
-=======
+
         // todo method 9
          public List<int> GetTopRatedMovies(int amount = 1)
          {
@@ -136,7 +130,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
              var average = (double) rewSum / numOfRew;
              return average;
          }
->>>>>>> Stashed changes
+
         //
         //todo method 10
          public List<int> GetTopMoviesByReviewer(int reviewer)
