@@ -160,15 +160,43 @@ namespace SDMCompulsoryMovieRatingService.Test
         }
 
         //todo test 7
-        // [Theory]
-        // [InlineData(1,2,3)]
-        // [InlineData(2,5,2)]
-        // [InlineData(3,1,2)]
+        [Fact]
         public void GetMoviesWithHighestNumberOfTopRatesTest()
         {
-            throw new NotImplementedException();
-        }
+            var service = new MovieRatingService(repoMock.Object);
             
+            dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 3, 1, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 3, 1, DateTime.Now));
+
+            var result = service.GetMoviesWithHighestNumberOfTopRates();
+            Assert.Equal(new List<int>{2}, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
+        }
+        
+        [Fact]
+        public void GetMoviesWithHighestNumberOfTopRatesTestTwo()
+        {
+            var service = new MovieRatingService(repoMock.Object);
+            
+            dataStore.Add(new MovieRating(1, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(3, 1, 2, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 2, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(1, 3, 5, DateTime.Now));
+            dataStore.Add(new MovieRating(2, 3, 5, DateTime.Now));
+
+            var result = service.GetMoviesWithHighestNumberOfTopRates();
+            Assert.Equal(new List<int>{2,3}, result);
+            repoMock.Verify( repo => repo.GetAll(), Times.Once);
+        }
+
+        //todo test 8
         [Fact]
         public void GetMostProductiveReviewersTest()
         {

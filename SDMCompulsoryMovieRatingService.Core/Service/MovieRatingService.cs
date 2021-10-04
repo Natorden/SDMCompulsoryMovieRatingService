@@ -75,29 +75,40 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         }
 
         //todo method 7
-        // public List<int> GetMoviesWithHighestNumberOfTopRates()
-        // {
-        //     throw new System.NotImplementedException();
-        // }
-        //
+         public List<int> GetMoviesWithHighestNumberOfTopRates()
+         {
+             var productiveRates = new List<int>();
+             
+             var topRates =
+                 from movieRating in _movieRatingRepo.GetAll()
+                 group movieRating.Grade by movieRating.Grade into g
+                 select new {Movie = g.Key, Grade = g.Count()};
+             topRates = topRates.OrderByDescending(arg => arg.Grade);
+
+             foreach (var rate in topRates)
+             {
+                 if (rate.Movie == 5)
+                 {
+                     productiveRates.Add(rate.Grade);
+                 }
+                 
+             }
+
+             return productiveRates;
+         
+         }
+        
         //todo method 8
         public List<int> GetMostProductiveReviewers()
         {
-            List<int> productiveReviewers = new List<int>();
-
             var reviewerReviews =
                 from movieRating in _movieRatingRepo.GetAll()
                 group movieRating.Reviewer by movieRating.Reviewer into g
                 select new {Reviewer = g.Key, Count = g.Count()};
             reviewerReviews = reviewerReviews.OrderByDescending(arg => arg.Count);
-            int maxReviews = reviewerReviews.First().Count;
-            
-            foreach (var reviewerCount in reviewerReviews)
-            {
-                if (reviewerCount.Count == maxReviews) productiveReviewers.Add(reviewerCount.Reviewer);
-            }
+            var maxReviews = reviewerReviews.First().Count;
 
-            return productiveReviewers;
+            return (from reviewerCount in reviewerReviews where reviewerCount.Count == maxReviews select reviewerCount.Reviewer).ToList();
         }
         
         //todo method 9
