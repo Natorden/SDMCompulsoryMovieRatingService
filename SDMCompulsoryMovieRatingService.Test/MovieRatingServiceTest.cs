@@ -106,7 +106,6 @@ namespace SDMCompulsoryMovieRatingService.Test
         }
 
         //todo test 5
-
         [Theory]
         [InlineData(1, 3.5)]
         [InlineData(2, 3.25)]
@@ -196,7 +195,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             repoMock.Verify(repo => repo.GetAll(), Times.Once);
         }
 
-        //todo test 8
+        //todo test 8.1
         [Fact]
         public void GetMostProductiveReviewersTest()
         {
@@ -214,7 +213,7 @@ namespace SDMCompulsoryMovieRatingService.Test
             Assert.Equal(new List<int> {1, 2}, result);
             repoMock.Verify(repo => repo.GetAll(), Times.Once);
         }
-
+        //todo test 8.2
         [Fact]
         public void GetMostProductiveReviewersTestSingle()
         {

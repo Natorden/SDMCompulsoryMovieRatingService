@@ -15,7 +15,6 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
             _movieRatingRepo = movieRatingRepository;
         }
 
-        //todo im adding todos then a number to show which number test this is in correlation to assignment pdf for easier navigation
         //todo method 1
         public int GetNumberOfReviewsFromReviewer(int reviewer)
         {
@@ -50,7 +49,6 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         }
 
         //todo method 5
-        //todo => do not convert to linq, i want to keep it as a foreach loop as its easier for me to read and explain
         public double GetAverageRateOfMovie(int movie)
         {
             var numOfRew = 0;
