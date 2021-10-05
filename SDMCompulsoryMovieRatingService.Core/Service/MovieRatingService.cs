@@ -127,23 +127,18 @@ namespace SDMCompulsoryMovieRatingService.Core.Service
         //Will return top 3 reviewers, with grades in descending order.
         public List<int> GetReviewersByMovie(int movie)
         {
-            var topRates = _movieRatingRepo.GetAll().Where(y => y.Movie == movie).OrderByDescending(y => y.Grade)
-                .ThenByDescending(z => z.ReviewDate);
-            return topRates.Select(z => z.Reviewer).ToList();
-
-            //List<int> result = new List<int>();
-            //var orderedReviewersForMovie =
-            //    from review in _movieRatingRepo.GetAll()
-            //    where review.Movie == movie
-            //    orderby review.Grade descending
-            //    select new {Reviewer = review.Reviewer};
-            //var listOrdered = orderedReviewersForMovie.Take(3);
-            //foreach (var reviewr in listOrdered)
-            //{
-            //    result.Add(reviewr.Reviewer);
-            //}
-
-            //return result;
+            List<int> result = new List<int>();
+            var orderedReviewersForMovie =
+                from review in _movieRatingRepo.GetAll()
+                where review.Movie == movie
+                orderby review.Grade descending
+                select new {Reviewer = review.Reviewer};
+            var listOrdered = orderedReviewersForMovie.Take(3);
+            foreach (var reviewr in listOrdered)
+            {
+                result.Add(reviewr.Reviewer);
+            }
+            return result;
         }
 
         public double AverageRateOfMovie(List<IMovieRating> list, int movie)
