@@ -1,4 +1,5 @@
 ﻿using System;
+using SDMCompulsoryMovieRatingService.Core.Service;
 
 namespace SDMCompulsoryMovieRatingService.Ui
 {
@@ -6,7 +7,14 @@ namespace SDMCompulsoryMovieRatingService.Ui
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            JsonReader reader = new JsonReader();
+            var list = reader.GetAll();
+
+            foreach (var mR in list)
+            {
+                Console.WriteLine($"{mR.Reviewer} / {mR.Movie} / {mR.Grade} / {mR.ReviewDate}");
+            }
+            
         }
     }
 }

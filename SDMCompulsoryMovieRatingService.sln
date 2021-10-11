@@ -7,6 +7,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDMCompulsoryMovieRatingService.Test", "SDMCompulsoryMovieRatingService.Test\SDMCompulsoryMovieRatingService.Test.csproj", "{48EA41BE-16B7-4AE8-8A99-CF8E6CFB508C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{10BD2D97-28E8-4BFA-BED7-F83386ED8521}"
+ProjectSection(SolutionItems) = preProject
+	TestJsonData.txt = TestJsonData.txt
+	HelloJson.json = HelloJson.json
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
