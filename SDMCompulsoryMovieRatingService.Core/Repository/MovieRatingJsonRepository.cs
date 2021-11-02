@@ -15,7 +15,7 @@ namespace SDMCompulsoryMovieRatingService.Core.Repository
     public override MovieRating ReadOneItem(JsonTextReader reader)
     {
       reader.Read();
-      int r = (int)reader.ReadAsInt32();
+      int r = (int)reader.ReadAsInt32()
 
       reader.Read();
       int m = (int) reader.ReadAsInt32();
